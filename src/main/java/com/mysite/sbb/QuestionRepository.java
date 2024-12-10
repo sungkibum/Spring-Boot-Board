@@ -10,6 +10,8 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {
     Question findBySubject(String subject);
 
     Question findBySubjectAndContent(String subject, String content);
+
+    List<Question> findBySubjectLike(String subject);
     //위의 메서드를 선언만 하고 구현하지 않았는데 실행이 되는 이유
     //JPA에 리포지터리의 메서드명을 분석하여 쿼리를 만들고 실행하는 기능이 있기 때문에 가능
     //findBy + 엔티티의 속성명과 같은 리포지터리의 메서드를 작성하면 입력한 속성의 값으로 데이터 조회 가능

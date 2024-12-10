@@ -18,7 +18,8 @@ class SbbApplicationTests {
 
 	@Test
 	void testJpa() {
-		Question question = questionRepository.findBySubjectAndContent("sbb가 무엇인가요?", "sbb에 대해서 알고 싶습니다.");
-		assertEquals(1, question.getId());
+		List<Question> oq = questionRepository.findBySubjectLike("sbb%");
+		Question q = oq.get(0);
+		assertEquals("sbb가 무엇인가요?", q.getSubject());
 		}
 	}
