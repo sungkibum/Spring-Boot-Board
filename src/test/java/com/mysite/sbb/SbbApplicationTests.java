@@ -22,13 +22,9 @@ class SbbApplicationTests {
 
 	@Test
 	void testJpa() {
-		Optional<Question> oq = questionRepository.findById(2);
-		assertTrue(oq.isPresent());
-		Question q = oq.get();
-		Answer answer = new Answer();
-		answer.setContent("네 자동으로 생성됩니다.");
-		answer.setQuestion(q);
-		answer.setCreateDate(LocalDateTime.now());
-		this.answerRepository.save(answer);
+		Optional<Answer> oa = answerRepository.findById(1);
+		assertTrue(oa.isPresent());
+		Answer a = oa.get();
+		assertEquals("네 자동으로 생성됩니다.", a.getContent());
 	}
 }
