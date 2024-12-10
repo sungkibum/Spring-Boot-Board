@@ -14,16 +14,21 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SpringBootTest
 class SbbApplicationTests {
 
-	@Autowired	//의존성 주입(스프링이 객체를 대신 생성하여 주입하는 기법)
+	@Autowired    //의존성 주입(스프링이 객체를 대신 생성하여 주입하는 기법)
+	private AnswerRepository answerRepository;
+
+	@Autowired
 	private QuestionRepository questionRepository;
 
 	@Test
 	void testJpa() {
-		assertEquals(2, this.questionRepository.count());
-		Optional<Question> oq = questionRepository.findById(1);
+		Optional<Question> oq = questionRepository.findById(2);
 		assertTrue(oq.isPresent());
 		Question q = oq.get();
-		this.questionRepository.delete(q);
-		assertEquals(1, this.questionRepository.count());
-		}
+		Answer answer = new Answer();
+		answer.setContent("네 자동으로 생성됩니다.");
+		answer.setQuestion(q);
+		answer.setCreateDate(LocalDateTime.now());
+		this.answerRepository.save(answer);
 	}
+}
