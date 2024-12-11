@@ -13,4 +13,9 @@ public class MainController {
     public String sbb() {
         return "안녕하세요. sbb에 오신 것을 환영합니다.";
     }
+
+    @GetMapping("/")
+    public String root() {
+        return "redirect:/question/list";   //redirect란 클라이언트가 요청하면 새로운 URL로 전송하는 것
+    }
 }
