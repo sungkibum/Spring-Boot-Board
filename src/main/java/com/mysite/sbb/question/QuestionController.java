@@ -16,7 +16,7 @@ public class QuestionController {
 
     private final QuestionService questionService;
 
-//    @ResponseBody     이젠 템플릿을 사용하기 때문에 필요없음
+    //    @ResponseBody     이젠 템플릿을 사용하기 때문에 필요없음
     @GetMapping("/list")
     public String list(Model model) {
         List<Question> questionList = this.questionService.getList();
@@ -29,5 +29,10 @@ public class QuestionController {
         Question question = this.questionService.getQuestion(id);
         model.addAttribute("question", question);
         return "question_detail";
+    }
+
+    @GetMapping("/create")
+    public String questionCreate() {
+        return "question_form";
     }
 }
