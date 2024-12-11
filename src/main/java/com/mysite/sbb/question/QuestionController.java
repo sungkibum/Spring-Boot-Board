@@ -24,6 +24,8 @@ public class QuestionController {
 
     @GetMapping("/question/detail/{id}")    //뒤에 id값은 변하는 id값이므로 PathVariable 어노테이션 사용
     public String detail(Model model, @PathVariable("id") Integer id) {
+        Question question = this.questionService.getQuestion(id);
+        model.addAttribute("question", question);
         return "question_detail";
     }
 }
