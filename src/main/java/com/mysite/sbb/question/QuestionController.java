@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -19,5 +20,10 @@ public class QuestionController {
         List<Question> questionList = this.questionService.getList();
         model.addAttribute("questionList", questionList);
         return "question_list";
+    }
+
+    @GetMapping("/question/detail/{id}")    //뒤에 id값은 변하는 id값이므로 PathVariable 어노테이션 사용
+    public String detail(Model model, @PathVariable("id") Integer id) {
+        return "question_detail";
     }
 }
