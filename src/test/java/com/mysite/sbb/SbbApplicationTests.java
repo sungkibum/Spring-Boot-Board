@@ -21,7 +21,7 @@ class SbbApplicationTests {
 
 	@Autowired    //의존성 주입(스프링이 객체를 대신 생성하여 주입하는 기법)
 	private QuestionService questionService;
-	@Transactional
+
 	@Test
 	void testJpa() {
 		for (int i = 1; i <= 300; i++) {
