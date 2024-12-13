@@ -49,4 +49,18 @@ public class AnswerController {
         answer.setContent(answer.getContent());
         return "answer_form";
     }
+
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/modify/{id}")
+    public String answerModify(@PathVariable("id") Integer id, @Valid AnswerForm answerForm, BindingResult bindingResult, Principal principal) {
+        if (bindingResult.hasErrors()) {
+            return "answer_form";
+        }
+        Answer answer = this.answerService.getAnswer(id);
+        if (!answer.getAuthor().getUsername().equals(principal.getName())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
+        }
+        this.answerService.modify(answer, answerForm.getContent());
+        return "redirect:/question/detail/" + answer.getQuestion().getId();
+    }
 }
